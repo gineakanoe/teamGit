@@ -19,7 +19,7 @@ function App() {
       <div>
         <h3>Nolan Branch</h3>
         <h3>Weather</h3> 
-        {/* <Weatherapp /> */}
+        <Weatherapp /> 
       </div>
       <div>
         <h3>Ginea Branch</h3>
