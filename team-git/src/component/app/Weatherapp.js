@@ -1,6 +1,5 @@
 import React from 'react';
 import WeatherChild from '../app/WeatherChild/WeatherChild';
-let temp =  'imperial';
 
 class Weatherapp extends React.Component{
     constructor(props){
