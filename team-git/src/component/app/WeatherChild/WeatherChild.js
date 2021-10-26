@@ -2,6 +2,7 @@ import {
     Card, CardImg, CardTitle, CardSubtitle
 } from 'reactstrap';
 
+
 const WeatherChild = (props) => {
     console.log(props);
     return (
@@ -16,7 +17,6 @@ const WeatherChild = (props) => {
                         </CardTitle>
                         <CardSubtitle>
                           <h3>{Math.round(props.main.temp)}°</h3>
-                          <button class='switch' onclick='cfSwitch()'/>
                         </CardSubtitle>
                         <div style={{textAlign: 'center'}}>
                         <CardImg src={`http://openweathermap.org/img/w/${props.weather[0].icon}.png`} alt='weather icon' style={{height: '50px', width: '50px'}}/>
