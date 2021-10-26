@@ -14,7 +14,7 @@ function App() {
       <div>
         <h3>Reagan Branch</h3>
         <h3>Nasa</h3>
-        {/* <Nasa /> */}
+        <Nasa />
       </div>
       <div>
         <h3>Nolan Branch</h3>
@@ -24,7 +24,7 @@ function App() {
       <div>
         <h3>Ginea Branch</h3>
         <h3>Ticketmaster</h3>
-        {/* <Ticketmaster /> */}
+        <Ticketmaster />
       </div>
 
     </div>
