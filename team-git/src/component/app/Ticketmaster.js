@@ -5,7 +5,7 @@ const baseURL = 'https://app.ticketmaster.com/discovery/v2/events.json';
 const key = 'FGYnq11NCzOT2Nsw8GyhfycPCAnJXEix';
 
 const Ticketmaster = () => {
-    // const [events, setEvents] = useState('');
+    const [events, setEvents] = useState('');
 
     let position = async () => {
         await navigator.geolocation.getCurrentPosition(function(position) {
@@ -48,10 +48,10 @@ const Ticketmaster = () => {
         url = endDateTime ? url + `&end_date=${endDateTime}` : url;
         
         const res = await fetch(url);
-        const data = res.json();
+        const eventsData = await res.json();
 
-        setResults(data);
-        console.log(data)
+        setResults(eventsData);
+        console.log(eventsData)
 
     };
     
@@ -78,7 +78,7 @@ const Ticketmaster = () => {
 
     return (
         <div>
-            <h1>Ticketmaster Events</h1>
+            {/* <h1>Ticketmaster Events</h1> */}
             <div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     {/* <span>Enter a single search term (required) : </span>
@@ -95,6 +95,7 @@ const Ticketmaster = () => {
                     <br />
                     <button className="submit">Submit search</button>
                 </form>
+                {/* {events.map(event => {<div> <h4>${event.name}</h4> <p>${event.type}</p> </div>})} */}
                 {results.length > 0 ? <TicketmasterResults results={results} changePage={changePageNumber} /> : null}
             </div>
         </div>
