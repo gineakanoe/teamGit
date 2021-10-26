@@ -4,12 +4,10 @@ import Nasa from './component/app/Nasa';
 import Weatherapp from './component/app/Weatherapp';
 import Ticketmaster from './component/app/Ticketmaster';
 
+
 function App() {
   return (
     <div className="App">
-      <h1>Team 5: 24hr Project</h1>
-      <h2>Reagan, Nolan, Ginea</h2>
-      <hr />
       <div>
         {/* <h3>Reagan Branch</h3> */}
         <h3>Nasa</h3>
@@ -25,7 +23,6 @@ function App() {
         <h3>Ticketmaster</h3>
         <Ticketmaster />
       </div>
-
     </div>
   );
 }
