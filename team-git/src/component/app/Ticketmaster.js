@@ -6,41 +6,35 @@ const Ticketmaster = () => {
     const baseURL = 'https://app.ticketmaster.com/discovery/v2/events.json';
     const apiKey = 'FGYnq11NCzOT2Nsw8GyhfycPCAnJXEix';
 
-    position = async () => {
-        await navigator.geolocation.getCurrentPosition(
-            position => this.setState({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            }, newState => console.log(newState)),
-            err => console.log(err)
-        );
-        console.log(this.state.latitude);
-    };
-    
- 
-    getEvents = async () => {
-        const res = await fetch(`${baseURL}?size=1&apikey=${apiKey}`);
-        const data = await res.json();
-    
-        setEvents(data);
-        console.log(data);
+    let position = async () => {
+        await navigator.geolocation.getCurrentPosition(function(position) {
+            // console.log('Latitude is: ', position.coords.latitude);
+            // console.log('Longitude is: ', position.coords.longitude);
+        }, )
     }
-   
+    
 
-    index.search('', {
-        aroundLatLng: 'position',
-        aroundRadius: 1000000 // 1000 km
-      }).then(({ hits }) => {
-        console.log(hits);
-      });
+    const geoPoint = position();
+    // const radius = 25;
+    const limit = 10;
+ 
+    let getEvents = async () => {
+        const res = await fetch(`${baseURL}?&${geoPoint}&size=1&apikey=${apiKey}`);
+        const data = await res.json();
+        const newData = data.filter.slice(0, 10);
+    
+        setEvents(newData);
+        console.log(newData);
+    }
+//    getEvents();
 
     
-     
+    
     return (
         <div>
             <h1>Ticketmaster Events</h1>
             <div>
-                {events.length > 0 ? <Ticketmaster events={events} /> : null}
+                {events.length > 0 && events.length < 15 ? <Ticketmaster events={events} /> : null}
             </div>
         </div>
     );
