@@ -1,66 +1,41 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const baseURL = 'https://app.ticketmaster.com/discovery/v2/events.json';
-const key = 'FGYnq11NCzOT2Nsw8GyhfycPCAnJXEix';
+const Ticketmaster = () => {
+    const [events, setEvents] = useState('');
 
-const Ticketmaster = (props) => {
-
-    const [search, setSearch] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
-    const [pageNumber, setPageNumber] = useState(0);
-    const [results, setResults] = useState([]);
+    const baseURL = 'https://app.ticketmaster.com/discovery/v2/events.json';
+    const apiKey = 'FGYnq11NCzOT2Nsw8GyhfycPCAnJXEix';
     
-    const fetchResults = () => {
-        let url = `${baseURL}?api-key=${key}&page=${pageNumber}&q=${search}`;
-        url = startDate ? url + `&begin_date=${startDate}` : url;
-        url = endDate ? url + `&end_date=${endDate}` : url;
+    useEffect(() => {
+        getData();
 
-        fetch(url)
-            .then(res => res.json())
-            .then(data => setResults(data.response.docs))
-            .catch(err => console.log(err));
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        fetchResults();
-        setPageNumber(0);
-    }
-
-    const changePageNumber = (e, direction) => {
-        e.preventDefault()
-        if (direction === 'down') {
-            if (pageNumber > 0) {
-                setPageNumber(pageNumber - 1)
-            }
+        async function getData() {
+            const res = await fetch(`${baseURL}?size=1&apikey=${apiKey}`);
+            const data = await res.json();
+    
+            setEvents(data);
         }
-        if (direction === 'up') {
-            setPageNumber(pageNumber + 1)
-            fetchResults();
-        }
-    }
+    }, []);
 
-    return(
-        <div className='main'>
-            <div className='mainDiv'>
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <span>Enter a single search term (required) : </span>
-                    <input type='text' name='search' onChange={(e) => setSearch(e.target.value)} required />
-                    <br />
-                    <span>Enter a start date: </span>
-                    <input type='date' name='startDate' pattern='[0-9]{8}' onChange={(e) => setStartDate(e.target.value)} />
-                    <br />
-                    <span>Enter a end date: </span>
-                    <input type='date' name='endDate' pattern='[0-9]{8}' onChange={(e) => setEndDate(e.target.value)} />
-                    <br />
-                    <button className='submit'>Submit search</button>
-                </form>
-                {/* {results.length > 0 ? <NytResults results={results} changePage={changePageNumber} /> : null} */}
-            </div>
+    
+     
+    return (
+        <div>
+            <h1>Ticketmaster Events</h1>
+
+            {events && (
+                <div className='events'>
+
+                    {events.map((event, index) => (
+                        <div key={index}>
+                            <h2>{event.name}</h2>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
+    
 };
-
 
 export default Ticketmaster;
