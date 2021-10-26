@@ -78,7 +78,7 @@ const Ticketmaster = () => {
 
     return (
         <div>
-            <h1>Ticketmaster Events</h1>
+            {/* <h1>Ticketmaster Events</h1> */}
             <div>
                 <form onSubmit={(e) => handleSubmit(e)}>
                     {/* <span>Enter a single search term (required) : </span>
